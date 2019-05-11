@@ -10,7 +10,7 @@ $t = @$_GET["translate"];
 </head>
 <body>
     <div class="container text-center mt-5">
-        <form method="POST">
+        <form method="GET">
           <div class="row form-group mx-sm-3 mb-2">
             <input type="text" class="col-9 form-control" name="translate" value="<?php echo $t;?>">
             <input type="submit" class="col-3 btn btn-primary" value="translate">
@@ -20,8 +20,8 @@ $t = @$_GET["translate"];
 </html>
 <?php
     // word
-    $input = @$_POST["translate"];
-
+    $input = @$_GET["translate"];
+    
     $all_words = array();
     //Get all words in word file 
     $fn = fopen("Indo-English.txt","r");
@@ -37,11 +37,13 @@ $t = @$_GET["translate"];
     fclose($fn);
     // find word
     $word = array_search("$input", $all_words);
-    // translate
-    $translate = indo_to_english($word);
-    $translated_word = $all_words[$translate];
-    // output
-    echo "Translated word: ".$translated_word;
+    if($word == null){
+        echo "$input";
+    } else {
+        $translate = indo_to_english($word);
+        $translated_word = $all_words[$translate];
+        echo "Translated word: ".$translated_word;
+    }
     // functions
     function indo_to_english($tword){
         $translated = $tword + 1;
