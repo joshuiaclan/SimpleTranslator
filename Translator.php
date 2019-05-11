@@ -1,5 +1,5 @@
 <?php
-$input = 'aku';
+$input = 'cantik';
 
 $all_words = array();
 //Get all words in word file 
@@ -14,9 +14,15 @@ $fn = fopen("Indo-English.txt","r");
         }
     }
 fclose($fn);
-
 $word = array_search("$input", $all_words);
-$translated = $word + 1;
-echo $all_words[$translated];
+$translate = indo_to_english($word);
+$translated_word = $all_words[$translate];
+
+echo $translated_word;
+
+function indo_to_english($tword){
+    $translated = $tword + 1;
+    return $translated;
+}
 
 ?>
